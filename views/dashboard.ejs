@@ -1,0 +1,27 @@
+
+
+<h2>Welcome, <%= user.username %>!</h2>
+<form action="/shorten" method="POST">
+  <input type="text" name="longUrl" placeholder="Enter long URL" required />
+  <button type="submit">Shorten</button>
+</form>
+
+<h3>Your URLs</h3>
+<ul>
+  <% urls.forEach(url => { %>
+    <li>
+      <strong>Long:</strong> <%= url.longUrl %><br />
+      <strong>Short:</strong> 
+      <a href="/<%= url.shortCode %>" target="_blank">
+        <%= 'http://localhost:3000/' + url.shortCode %>
+      </a><br />
+      <strong>Clicks:</strong> <%= url.clicks %><br />
+      <form action="/delete/<%= url._id %>" method="POST">
+        <button type="submit">Delete</button>
+      </form>
+    </li>
+    <hr />
+  <% }) %>
+</ul>
+
+<a href="/logout">Logout</a>
